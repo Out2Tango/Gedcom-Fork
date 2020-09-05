@@ -223,10 +223,10 @@ namespace GeneGenie.Gedcom
                             period = date1;
                             break;
                         case GedcomDatePeriod.After:
-                            period = string.Format("AFT {0}", date1);
+                            period = string.Format("Aft. {0}", date1);
                             break;
                         case GedcomDatePeriod.Before:
-                            period = string.Format("BEF {0}", date1);
+                            period = string.Format("Bef. {0}", date1);
                             break;
                         case GedcomDatePeriod.Between:
                             // TODO: this is a hack as we don't parse _Date2 in
@@ -242,13 +242,13 @@ namespace GeneGenie.Gedcom
 
                             break;
                         case GedcomDatePeriod.About:
-                            period = string.Format("ABT {0}", date1);
+                            period = string.Format("Abt. {0}", date1);
                             break;
                         case GedcomDatePeriod.Calculated:
                             period = string.Format("CAL {0}", date1);
                             break;
                         case GedcomDatePeriod.Estimate:
-                            period = string.Format("EST {0}", date1);
+                            period = string.Format("Est. {0}", date1);
                             break;
                         case GedcomDatePeriod.Interpretation:
                             period = string.Format("INT {0}", date1);
@@ -258,7 +258,8 @@ namespace GeneGenie.Gedcom
                             // properly yet and just end up with it all in _Date1
                             if (string.IsNullOrEmpty(date2))
                             {
-                                period = string.Format("FROM {0}", date1);
+                                //period = string.Format("FROM {0}", date1);
+                                period = date1;
                             }
                             else
                             {
@@ -520,6 +521,16 @@ namespace GeneGenie.Gedcom
             int start = 0, len = dataString.Length;
             var culture = CultureInfo.CurrentCulture;
 
+            //Joe
+            if (dataString == "1742")
+            {
+                int e = 9;
+            }
+            else if (dataString.Contains( "1680"))
+            {
+                int e = 9;
+            }
+            //Joe
             foreach (var periodMapping in StaticDateData.PeriodMappings)
             {
                 if (periodMapping.TextPosition == GedcomDatePeriodPosition.Prefix)
@@ -569,6 +580,21 @@ namespace GeneGenie.Gedcom
         /// <param name="inputDate">The date to parse as a text string.</param>
         public void ParseDateString(string inputDate)
         {
+            //Joe
+            inputDate = inputDate.Replace("JAN", "Jan.");
+            inputDate = inputDate.Replace("FEB", "Feb.");
+            inputDate = inputDate.Replace("MAR", "Mar.");
+            inputDate = inputDate.Replace("APR", "Apr.");
+            inputDate = inputDate.Replace("MAY", "May.");
+            inputDate = inputDate.Replace("JUN", "Jun.");
+            inputDate = inputDate.Replace("JUL", "Jul.");
+            inputDate = inputDate.Replace("AUG", "Aug.");
+            inputDate = inputDate.Replace("SEP", "Sep.");
+            inputDate = inputDate.Replace("OCT", "Oct.");
+            inputDate = inputDate.Replace("NOV", "Nov.");
+            inputDate = inputDate.Replace("DEC", "Dec.");
+            //Joe
+
             // clear possible Period cached value;
             this.period = null;
 
