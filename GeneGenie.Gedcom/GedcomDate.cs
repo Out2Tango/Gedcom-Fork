@@ -248,7 +248,7 @@ namespace GeneGenie.Gedcom
                             period = string.Format("CAL {0}", date1);
                             break;
                         case GedcomDatePeriod.Estimate:
-                            period = date1;
+                            period = string.Format("FROM {0}", date1); 
                             break;
                         case GedcomDatePeriod.Interpretation:
                             period = string.Format("INT {0}", date1);
@@ -258,7 +258,7 @@ namespace GeneGenie.Gedcom
                             // properly yet and just end up with it all in _Date1
                             if (string.IsNullOrEmpty(date2))
                             {
-                                period = string.Format("FROM {0}", date1);
+                                period = date1;
                             }
                             else
                             {
